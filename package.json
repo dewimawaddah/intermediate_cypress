@@ -1,0 +1,15 @@
+{
+  "name": "learn_cypress",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "herokuapp_test": "npx cypress run --browser chrome --spec 'cypress/e2e/4-web-testing/*'",
+    "reqres_test" : "npx cypress run --browser chrome --spec 'cypress/e2e/3-api-testing/reqres.cy.js'"
+  },
+  "author": "dewi",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^13.1.0"
+  }
+}
