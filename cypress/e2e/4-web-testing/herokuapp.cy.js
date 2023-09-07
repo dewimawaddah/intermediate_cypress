@@ -55,7 +55,7 @@ describe("test herokuapp", () => {
     );
   });
 
-  it.only("user success make appointment", () => {
+  it("user success make appointment", () => {
     cy.get("#menu-toggle > .fa").click();
     cy.get("#sidebar-wrapper").should("have.class", "active");
     cy.get(".sidebar-nav > :nth-child(4) > a").click();
@@ -78,7 +78,7 @@ describe("test herokuapp", () => {
     cy.get("h2").should("contain.text", "Appointment Confirmation");
   });
 
-  it.skip("user failed make appointment with empty visit date", () => {
+  it.only("user failed make appointment with empty visit date", () => {
     cy.get("#menu-toggle > .fa").click();
     cy.get("#sidebar-wrapper").should("have.class", "active");
     cy.get(".sidebar-nav > :nth-child(4) > a").click();
@@ -95,5 +95,8 @@ describe("test herokuapp", () => {
     cy.get("#radio_program_medicaid").check("Medicaid");
     cy.get("#txt_comment").type("hello saya appointment di tgl 06");
     cy.get("#btn-book-appointment").click();
+    cy.get("#txt_visit_date:invalid")
+      .invoke("prop", "validationMessage")
+      .should("equal", "Please fill out this field.");
   });
 });
