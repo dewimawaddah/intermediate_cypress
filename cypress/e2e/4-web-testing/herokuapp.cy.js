@@ -4,14 +4,17 @@ describe("test herokuapp", () => {
     cy.visit(Cypress.env("herokuapp_url"));
   });
 
-  it("success login with username dan password valid", () => {
-    cy.get("#menu-toggle > .fa").click();
-    cy.get("#sidebar-wrapper").should("have.class", "active");
-    cy.get(".sidebar-nav > :nth-child(4) > a").click();
-    cy.get(".lead").should("have.text", "Please login to make appointment.");
-    cy.login("John Doe", "ThisIsNotAPassword");
-    cy.url().should("include", "/#appointment");
-    cy.get("h2").should("contain.text", "Make Appointment");
+  it.only("success login with username dan password valid", () => {
+    cy.fixture("user.json").then((user) => {
+      const datauser = user[0];
+      cy.get("#menu-toggle > .fa").click();
+      cy.get("#sidebar-wrapper").should("have.class", "active");
+      cy.get(".sidebar-nav > :nth-child(4) > a").click();
+      cy.get(".lead").should("have.text", "Please login to make appointment.");
+      cy.login(datauser.username, datauser.password);
+      cy.url().should("include", "/#appointment");
+      cy.get("h2").should("contain.text", "Make Appointment");
+    });
   });
 
   it("failed login with username invalid", () => {
@@ -54,7 +57,7 @@ describe("test herokuapp", () => {
     );
   });
 
-  it.only("user success make appointment", () => {
+  it("user success make appointment", () => {
     cy.get("#menu-toggle > .fa").click();
     cy.get("#sidebar-wrapper").should("have.class", "active");
     cy.get(".sidebar-nav > :nth-child(4) > a").click();
