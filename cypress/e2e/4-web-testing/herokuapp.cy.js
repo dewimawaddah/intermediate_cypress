@@ -10,7 +10,6 @@ describe("test herokuapp", () => {
     cy.get(".sidebar-nav > :nth-child(4) > a").click();
     cy.get(".lead").should("have.text", "Please login to make appointment.");
     cy.login("John Doe", "ThisIsNotAPassword");
-    cy.get("#btn-login").click();
     cy.url().should("include", "/#appointment");
     cy.get("h2").should("contain.text", "Make Appointment");
   });
@@ -55,16 +54,16 @@ describe("test herokuapp", () => {
     );
   });
 
-  it("user success make appointment", () => {
+  it.only("user success make appointment", () => {
     cy.get("#menu-toggle > .fa").click();
     cy.get("#sidebar-wrapper").should("have.class", "active");
     cy.get(".sidebar-nav > :nth-child(4) > a").click();
     cy.get(".lead").should("have.text", "Please login to make appointment.");
-    cy.get("#txt-username").type("John Doe");
-    cy.get("#txt-password").type("ThisIsNotAPassword");
-    cy.get("#btn-login").click();
+    cy.ketik("#txt-username", "John Doe");
+    cy.ketik("#txt-password", "ThisIsNotAPassword");
+    cy.klik("#btn-login");
     cy.url().should("include", "/#appointment");
-    cy.get("h2").should("contain.text", "Make Appointment");
+    cy.verifyContain("h2", "Make Appointment");
     cy.get("select")
       .select("Hongkong CURA Healthcare Center")
       .should("have.value", "Hongkong CURA Healthcare Center");
@@ -78,16 +77,16 @@ describe("test herokuapp", () => {
     cy.get("h2").should("contain.text", "Appointment Confirmation");
   });
 
-  it.only("user failed make appointment with empty visit date", () => {
+  it("user failed make appointment with empty visit date", () => {
     cy.get("#menu-toggle > .fa").click();
     cy.get("#sidebar-wrapper").should("have.class", "active");
     cy.get(".sidebar-nav > :nth-child(4) > a").click();
     cy.get(".lead").should("have.text", "Please login to make appointment.");
-    cy.get("#txt-username").type("John Doe");
-    cy.get("#txt-password").type("ThisIsNotAPassword");
-    cy.get("#btn-login").click();
+    cy.ketik("#txt-username", "John Doe");
+    cy.ketik("#txt-password", "ThisIsNotAPassword");
+    cy.klik("#btn-login");
     cy.url().should("include", "/#appointment");
-    cy.get("h2").should("contain.text", "Make Appointment");
+    cy.verifyContain("h2", "Make Appointment");
     cy.get("select")
       .select("Hongkong CURA Healthcare Center")
       .should("have.value", "Hongkong CURA Healthcare Center");

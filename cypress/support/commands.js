@@ -13,6 +13,19 @@
 Cypress.Commands.add("login", (email, password) => {
   cy.get("#txt-username").type(email);
   cy.get("#txt-password").type(password);
+  cy.get("#btn-login").click();
+});
+
+Cypress.Commands.add("ketik", (locator, value) => {
+  cy.get(locator).should("be.visible").type(value);
+});
+
+Cypress.Commands.add("klik", (locator) => {
+  cy.get(locator).should("be.visible").click();
+});
+
+Cypress.Commands.add("verifyContain", (locator, value) => {
+  cy.get(locator).should("contain.text", value);
 });
 //
 //
