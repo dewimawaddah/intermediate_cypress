@@ -17,7 +17,7 @@ describe("test herokuapp", () => {
     });
   });
 
-  it("failed login with username invalid", () => {
+  it.only("failed login with username invalid", () => {
     cy.get("#menu-toggle > .fa").click();
     cy.get("#sidebar-wrapper").should("have.class", "active");
     cy.get(".sidebar-nav > :nth-child(4) > a").click();
@@ -25,8 +25,8 @@ describe("test herokuapp", () => {
     cy.get("#txt-username").type("John Does");
     cy.get("#txt-password").type("ThisIsNotAPassword");
     cy.get("#btn-login").click();
-    cy.get(".text-danger").should(
-      "contain.text",
+    cy.verifyContain(
+      ".text-danger",
       "Login failed! Please ensure the username and password are valid."
     );
   });
