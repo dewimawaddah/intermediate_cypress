@@ -17,7 +17,7 @@ describe("test herokuapp", () => {
     });
   });
 
-  it.only("failed login with username invalid", () => {
+  it("failed login with username invalid", () => {
     cy.get("#menu-toggle > .fa").click();
     cy.get("#sidebar-wrapper").should("have.class", "active");
     cy.get(".sidebar-nav > :nth-child(4) > a").click();
@@ -55,6 +55,25 @@ describe("test herokuapp", () => {
       "contain.text",
       "Login failed! Please ensure the username and password are valid."
     );
+  });
+
+  it.skip("test multiple failed login with fixtures", () => {
+    cy.fixture("fail-user.json").then((user) => {
+      user.failed_login.forEach((datauser) => {
+        cy.get("#menu-toggle > .fa").click();
+        cy.get("#sidebar-wrapper").should("have.class", "active");
+        cy.get(".sidebar-nav > :nth-child(4) > a").click();
+        cy.get(".lead").should(
+          "have.text",
+          "Please login to make appointment."
+        );
+        cy.login(datauser.username, datauser.password);
+        cy.verifyContain(
+          ".text-danger",
+          "Login failed! Please ensure the username and password are valid."
+        );
+      });
+    });
   });
 
   it("user success make appointment", () => {
