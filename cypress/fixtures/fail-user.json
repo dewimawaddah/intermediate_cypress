@@ -2,15 +2,18 @@
     "failed_login" : [
     {
         "username" : "John Does",
-        "password" : "ThisIsNotAPassword"
+        "password" : "ThisIsNotAPassword",
+        "error_message": "Login failed! Please ensure the username and password are valid."
     },
     {
         "username" : "John Doe",
-        "password" : "ThisIsNotAPasswordd"
+        "password" : "ThisIsNotAPasswordd",
+        "error_message": "Login failed! Please ensure the username and password are valid."
     },
     {
         "username" : "John Does",
-        "password" : "ThisIsNotAPasswordd"
+        "password" : "ThisIsNotAPasswordd",
+        "error_message": "Login failed! Please ensure the username and password are valid."
     }
 ]
 }
